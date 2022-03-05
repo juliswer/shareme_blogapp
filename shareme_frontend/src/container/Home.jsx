@@ -31,7 +31,7 @@ const Home = () => {
       <div className="hidden md:flex h-screen flex-initial">
         <Sidebar />
       </div>
-      <div className='flex md:hidden flex-row'>
+      <div className="flex md:hidden flex-row">
         <HiMenu fontSize={40} className='cursor-pointer' onClick={() => setToggleSidebar(false)} />
         <Link to="/">
           <img src={logo} alt="logo" className="w-28" />
