@@ -10,6 +10,9 @@ import Spinner from './Spinner';
 
 const randomImage = 'https://source.unsplash.com/1600x900/?nature,photography,techonolgy';
 
+const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
+const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
+
 const UserProfile = () => {
   
   const [user, setUser] = useState(null);
@@ -29,6 +32,11 @@ const UserProfile = () => {
 
   }, [userId]);
 
+  const logout = () => {
+    localStorage.clear();
+    navigate('/login');
+  }
+
   if(!user) {
     return <Spinner message="Loading Profile..."/>
   }
@@ -43,6 +51,53 @@ const UserProfile = () => {
               className="w-full h-370 2xl:h-510 shadow-lg object-cover"
               alt="banner-pic"
             />
+            <img 
+              className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
+              src={user.image}
+              alt="user-pic"
+            />
+            <h1 className="font-bold text-3xl text-center mt-3">{user.userName}</h1>
+            <div className="absolute top-0 z-1 right-0 p-2">
+              {userId === user._id && (
+                 <GoogleLogout
+                 clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
+                 render={(renderProps) => (
+                   <button
+                     type="button"
+                     className="bg-white p-2 rounded-full cursor-pointer outline-none shadow-md"
+                     onClick={renderProps.onClick}
+                     disabled={renderProps.disabled}
+                   >
+                      <AiOutlineLogout color="red" fontSize={21} />
+                   </button>
+                 )}
+                 onLogoutSuccess={logout}
+                 cookiePolicy={'single_host_origin'}
+                />
+              )}
+            </div>
+          </div>
+          <div className="text-center mb-7 mt-4">
+            <button
+              type="button"
+              onClick={(e) => {
+                setText(e.target.textContent);
+                setActiveBtn('created');
+              }}
+              className={`${activeBtn === 'created' ? activeBtnStyles : notActiveBtnStyles}`}
+            >
+              Created
+            </button>
+            <button
+              type="button"
+              onClick={(e) => {
+                setText(e.target.textContent);
+                setActiveBtn('saved');
+              }}
+              className={`${activeBtn === 'saved' ? activeBtnStyles : notActiveBtnStyles}`}
+            >
+              Saved
+            </button>
           </div>
         </div>
       </div>
