@@ -16,7 +16,7 @@ const Pin = ({pin: {postedBy, image, _id, destination, save}}) => {
 
   const user = fetchUser();
 
-  const alreadySaved = !!(save?.filter((item) => item.postedBy._id === user.googleId))?.length;
+  const alreadySaved = !!(save?.filter((item) => item.postedBy._id === user?.googleId))?.length;
 
   const savePin = (id) => {
     if(!alreadySaved) {
@@ -26,10 +26,10 @@ const Pin = ({pin: {postedBy, image, _id, destination, save}}) => {
         .setIfMissing({save: []})
         .insert('after', 'save[-1]', [{
           _key: uuidv4(),
-          userId: user.googleId,
+          userId: user?.googleId,
           postedBy: {
             _type: 'postedBy',
-            _ref: user.googleId
+            _ref: user?.googleId
           }
         }])
         .commit()
@@ -102,7 +102,7 @@ const Pin = ({pin: {postedBy, image, _id, destination, save}}) => {
                   Visit Website
                 </a>
               )}
-              {postedBy?._id === user.googleId && (
+              {postedBy?._id === user?.googleId && (
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
@@ -124,7 +124,7 @@ const Pin = ({pin: {postedBy, image, _id, destination, save}}) => {
           src={postedBy?.image}
           alt="user-profile"
         />
-        <p className="font-semibold capitalize">{postedBy?._id === user.googleId ? `${postedBy?.userName} (You)` : 'pepe'}</p>
+        <p className="font-semibold capitalize">{postedBy?._id === user?.googleId ? `${postedBy?.userName} (You)` : 'pepe'}</p>
       </Link>
     </div>
   )
