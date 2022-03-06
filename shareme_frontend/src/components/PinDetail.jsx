@@ -139,7 +139,7 @@ const PinDetail = ({user}) => {
             className="bg-red-500 text-white rounded-full px-6 py-2 font-semibold text-base outline-none"
             onClick={addComment}
           >
-            {addingComment ? 'Posting the comment...' : 'Posted'}
+            {addingComment ? 'Posting the comment...' : 'Post'}
           </button>
         </div>
       </div>
