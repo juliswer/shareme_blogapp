@@ -45,9 +45,9 @@ const Sidebar = ({user, closeToggle}) => {
               key={category.name}
             >
               <img 
-                source={category.image}
+                src={category.image}
                 className="w-8 h-8 rounded-full shadow-sm"
-                alt={category.name}
+                alt="category"
               />
               {category.name}
             </NavLink>
