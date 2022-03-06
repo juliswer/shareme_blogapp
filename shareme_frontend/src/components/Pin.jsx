@@ -11,7 +11,6 @@ import { fetchUser } from '../utils/fetchUser';
 const Pin = ({pin: {postedBy, image, _id, destination, save}}) => {
 
   const [postHovered, setPostHovered] = useState(false);
-  const [savingPost, setSavingPost] = useState(false);
 
   const navigate = useNavigate();
 
@@ -21,7 +20,6 @@ const Pin = ({pin: {postedBy, image, _id, destination, save}}) => {
 
   const savePin = (id) => {
     if(!alreadySaved) {
-      setSavingPost(true);
 
       client
         .patch(id)
@@ -37,7 +35,6 @@ const Pin = ({pin: {postedBy, image, _id, destination, save}}) => {
         .commit()
         .then(() => {
           window.location.reload();
-          setSavingPost(false);
         })
     }
   }
