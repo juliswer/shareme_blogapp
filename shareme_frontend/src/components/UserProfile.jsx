@@ -8,7 +8,7 @@ import {client} from '../client';
 import MasonryLayout from './MasonryLayout';
 import Spinner from './Spinner';
 
-const randomImage = 'https://source.unsplash.com/1600x900/?nature,photography,techonolgy';
+const randomImage = 'https://source.unsplash.com/1600x750/?nature,photography,techonolgy';
 
 const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
 const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
@@ -118,9 +118,15 @@ const UserProfile = () => {
             </button>
           </div>
 
-          <div className="px-2">
-            <MasonryLayout pins={pins}/>
-          </div>
+          {pins?.length ? (
+            <div className="px-2">
+              <MasonryLayout pins={pins}/>
+            </div>
+          ) : (
+            <div className="flex justify-center font-bold items-center w-full text-xl mt-2">
+              No Pins Found!
+            </div>
+          )}
 
         </div>
       </div>
