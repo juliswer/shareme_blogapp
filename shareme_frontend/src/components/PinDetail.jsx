@@ -35,12 +35,34 @@ const PinDetail = ({user}) => {
 
   useEffect(() => {
     fetchPinDetails();
-  }, []);
+  }, [pinId]);
 
   if(!pinDetail) return <Spinner message="Loading pin..." />
 
   return (
-    <div>PinDetail</div>
+    <div className="flex xl-flex-row flex-col m-auto bg-white" style={{maxWidth: '1500px', borderRadius: '32px'}}>
+      <div className="flex justify-center items-center md:item-start flex-initial">
+        <img 
+          src={pinDetail?.image && urlFor(pinDetail.image).url()}
+          className="rounded-t-3xl rounded-b-lg"
+          alt="user-post"
+        /> 
+      </div>
+      <div className="w-full p-5 flex-1 xl:min-620">
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2 items-center">
+            <a
+              href={`${pinDetail.image?.asset?.url}?dl=`}
+              download
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white w-9 h-9 rounded-full flex items-center justify-center text-dark text-xl opacity-75 hover:opacity-100 hover:shadow--md outline-none"
+            >
+              <MdDownloadForOffline className="text-2xl text-gray-500" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
