@@ -17,7 +17,7 @@ const Pin = ({pin: {postedBy, image, _id, destination, save}}) => {
 
   const user = fetchUser();
 
-  const alreadySaved = !!(save?.filter((item) => item.postedBy?._id === user.googleId))?.length;
+  const alreadySaved = !!(save?.filter((item) => item.postedBy._id === user.googleId))?.length;
 
   return (
     <div className="m-2">
@@ -44,7 +44,7 @@ const Pin = ({pin: {postedBy, image, _id, destination, save}}) => {
                   <MdDownloadForOffline className="text-2xl text-gray-500" />
                 </a>
               </div>
-              {alreadySaved !== 0 ? (
+              {alreadySaved ? (
                 <button type="button" className="bg-red-500">
                   Saved
                 </button>
