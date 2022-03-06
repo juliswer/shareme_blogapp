@@ -60,7 +60,26 @@ const PinDetail = ({user}) => {
               <MdDownloadForOffline className="text-2xl text-gray-500" />
             </a>
           </div>
+          <a
+            href={pinDetail.destination}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Visit Website
+          </a>
         </div>
+        <div>
+          <h1 className="text-4xl font-bold break-words mt-3">{pinDetail.title}</h1>
+          <p className="mt-3">{pinDetail.about}</p>
+        </div>
+        <Link to={`user-profile/${pinDetail.postedBy?._id}`} className="flex gap-2 mt-2 items-center">
+          <img
+            className="w-8 h-8 rounded-full object-cover"
+            src={pinDetail.postedBy?.image}
+            alt="user-profile"
+          />
+          <p className="font-semibold capitalize">{pinDetail.postedBy?.userName}</p>
+        </Link>
       </div>
     </div>
   )
