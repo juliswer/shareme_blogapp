@@ -8,6 +8,8 @@ import {client} from '../client';
 import MasonryLayout from './MasonryLayout';
 import Spinner from './Spinner';
 
+const randomImage = 'https://source.unsplash.com/1600x900/?nature,photography,techonolgy';
+
 const UserProfile = () => {
   
   const [user, setUser] = useState(null);
@@ -17,12 +19,34 @@ const UserProfile = () => {
   const navigate = useNavigate();
   const {userId} = useParams();
 
+  useEffect(() => {
+    const query = userQuery(userId);
+
+    client.fetch(query)
+      .then((data) => {
+        setUser(data[0]); 
+      })
+
+  }, [userId]);
+
   if(!user) {
     return <Spinner message="Loading Profile..."/>
   }
 
   return (
-    <div>UserProfile</div>
+    <div className="relative pb-2 h-full justify-center items-center">
+      <div className="flex flex-col pb-5">
+        <div className="relative flex flex-col mb-7">
+          <div className="flex flex-col justify-center items-center">
+            <img 
+              src={randomImage}
+              className="w-full h-370 2xl:h-510 shadow-lg object-cover"
+              alt="banner-pic"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
