@@ -14,6 +14,7 @@ const categories = [
   {name: 'Photography'},
   {name: 'Gaming'},
   {name: 'Coding'},
+  {name: 'Other'}
 ]
 
 const Sidebar = ({user, closeToggle}) => {
@@ -36,13 +37,33 @@ const Sidebar = ({user, closeToggle}) => {
           <NavLink
             to="/"
             className={({isActive}) => isActive ? isActiveStyle : isNotActiveStyle}
+            onClick={handleCloseSidebar}
           >
             <RiHomeFill />
             Home
           </NavLink>
           <h3 className="mt-2 px-5 text-base 2xl:text-xl">Discover categories</h3>  
+          {categories.slice(0, categories.length - 1).map((category) => (
+            <NavLink
+              to={`/category/${category.name.toLocaleLowerCase()}`}
+              className={({isActive}) => isActive ? isActiveStyle : isNotActiveStyle}
+              onClick={handleCloseSidebar}
+              key={category.name}
+            >
+              {category.name}
+            </NavLink>
+          ))}
         </div>
       </div>
+      {user && (
+        <Link
+          to={`user-profile/${user._id}`}
+          className="flex my-5 mb-3 gap-2 p-2 items-center bg-white rounded-lg shadow-lg"
+        >
+          <img src={user.image} alt="user-profile"  className="w-10 h-10 rounded-full"/>
+          <p>{user.userName}</p>
+        </Link>
+      )}
     </div>
   )
 }
