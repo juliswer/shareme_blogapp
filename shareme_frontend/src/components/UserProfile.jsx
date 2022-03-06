@@ -3,7 +3,7 @@ import {AiOutlineLogout} from 'react-icons/ai';
 import {useParams, useNavigate} from 'react-router-dom';
 import {GoogleLogout} from 'react-google-login';
 
-import {userCreatedPinsQuery, userQuery, userSavePinsQuery} from '../utils/data';
+import {userCreatedPinsQuery, userQuery, userSavedPinsQuery, userSavePinsQuery} from '../utils/data';
 import {client} from '../client';
 import MasonryLayout from './MasonryLayout';
 import Spinner from './Spinner';
@@ -31,6 +31,24 @@ const UserProfile = () => {
       })
 
   }, [userId]);
+
+  useEffect(() => {
+
+    if(text === 'Created') {
+      const createdPinsQuery = userCreatedPinsQuery(userId);
+      client.fetch(createdPinsQuery)
+        .then((data) => {
+          setPins(data);
+        })
+    } else {
+      const savedPinsQuery = userSavedPinsQuery(userId);
+      client.fetch(savedPinsQuery)
+        .then((data) => {
+          setPins(data);
+        })
+    }
+
+  }, [text, userId]);
 
   const logout = () => {
     localStorage.clear();
@@ -99,6 +117,11 @@ const UserProfile = () => {
               Saved
             </button>
           </div>
+
+          <div className="px-2">
+            <MasonryLayout pins={pins}/>
+          </div>
+
         </div>
       </div>
     </div>
