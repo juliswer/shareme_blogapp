@@ -7,6 +7,7 @@ import { client, urlFor } from '../client';
 import MasonryLayout from './MasonryLayout';
 import { pinDetailMorePinQuery, pinDetailQuery } from '../utils/data';
 import Spinner from './Spinner';
+import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 
 const PinDetail = ({ user }) => {
   const { pinId } = useParams();
@@ -81,7 +82,8 @@ const PinDetail = ({ user }) => {
                   <MdDownloadForOffline />
                 </a>
               </div>
-              <a href={pinDetail.destination} target="_blank" rel="noreferrer">
+              <a href={pinDetail.destination} target="_blank" rel="noreferrer" className="bg-black flex items-center gap-2 text-white font-bold p-2 pl-4 pr-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md" >
+                <BsFillArrowUpRightCircleFill />
                 Visit Website
               </a>
             </div>
